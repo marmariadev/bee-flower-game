@@ -81,6 +81,25 @@ document.addEventListener('DOMContentLoaded', () => {
         createGrid();
     }
 
+    // Add event listener for the keydown event
+    document.addEventListener('keydown', (e) => {
+        // Check which arrow key was pressed
+        switch (e.key) {
+            case 'ArrowUp':
+                moveBee(0, -1); // Move the bee up
+                break;
+            case 'ArrowDown':
+                moveBee(0, 1); // Move the bee down
+                break;
+            case 'ArrowLeft':
+                moveBee(-1, 0); // Move the bee left
+                break;
+            case 'ArrowRight':
+                moveBee(1, 0); // Move the bee right
+                break;
+        }
+    });
+
     // Create the grid when the DOM is loaded
     createGrid();
 });
