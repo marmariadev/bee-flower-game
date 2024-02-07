@@ -39,6 +39,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function moveBee(x, y) {
+        // Calculate the new position of the bee
+        const newX = beePosition.x + x;
+        const newY = beePosition.y + y;
+
+        // Check if the new position is valid and not occupied by a bush
+        const isValidMove = newX >= 0 && newX < gridSize && newY >= 0 && newY < gridSize && !isOccupiedByBush(newX, newY);
+
+        if (isValidMove) {
+            beePosition = { x: newX, y: newY }; // Update the bee position
+
+            // Check if the bee reached the flower position
+            if (isNewPositionEqualToFlower(newX, newY)) {
+                alert('You won!'); // Show win message
+                resetBeePosition(); // Reset bee position
+            }
+
+            updateGrid(); // Update the grid after moving the bee
+        }
+    }
+
+    // Function to check if a position is occupied by a bush
+    function isOccupiedByBush(x, y) {
+        return bushPositions.some(position => position.x === x && position.y === y);
+    }
+
+    // Function to check if a new position is equal to the flower position
+    function isNewPositionEqualToFlower(x, y) {
+        return x === flowerPosition.x && y === flowerPosition.y;
+    }
+
+    // Function to reset the bee position
+    function resetBeePosition() {
+        beePosition = { x: 0, y: 0 };
+    }
+
+    // Function to update the grid
+    function updateGrid() {
+        gameBoard.innerHTML = '';
+        createGrid();
+    }
+
     // Create the grid when the DOM is loaded
     createGrid();
 });
